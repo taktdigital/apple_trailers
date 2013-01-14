@@ -8,8 +8,8 @@ module AppleTrailers
       options.each { |key, value| instance_variable_set("@"+key.to_s, value)}
     end
 
-    def appletrailers
-      doc = Nokogiri::HTML(Net::HTTP.get(URI(["http://appletrailers.apple.com", @location, "includes/playlists/web.inc"].join(''))))
+    def trailers
+      doc = Nokogiri::HTML(Net::HTTP.get(URI(["http://trailers.apple.com", @location, "includes/playlists/web.inc"].join(''))))
       doc.css('.trailer').count > 1 ? get_multiple_trailers(doc) : get_single_trailer(doc)
     end
 
