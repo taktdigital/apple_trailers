@@ -18,7 +18,33 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    movies = AppleTrailers.just_added
+    
+    movies.count
+     => 80 
+     
+    movie = movies.first
+    
+    movie.title
+     => "A Place at the Table" 
+    
+    movie.studio
+     => "Magnolia Pictures" 
+    
+    movie.rating
+     => "PG"
+    
+    movie.genre
+     => "Documentary"
+     
+    movie.trailers.first.title
+     => "A Place at the Table - Trailer" 
+     
+    movie.trailers.first.description
+     => "A Place at the Table: A Documentary produced by Magnolia Pictures.  For more information visit http://www.facebook.com/aPlaceAtTheTableMovie" 
+    
+    movie.trailers.first.url
+     => "http://trailers.apple.com/movies/magnolia_pictures/aplaceatthetable/aplaceatthetable-tlr1_h1080p.mov"
 
 ## Contributing
 
