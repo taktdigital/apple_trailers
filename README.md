@@ -1,6 +1,6 @@
 # AppleTrailers
 
-TODO: Write a gem description
+Pulls recently added movie trailers from trailers.apple.com.  Includes basic information about the movie, including genre, production studio, title, release date, rating, and the url of the highest definition videos available.
 
 ## Installation
 
