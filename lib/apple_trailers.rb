@@ -5,15 +5,14 @@ require 'json'
 require 'net/http'
 
 module AppleTrailers
-  @@protocol = "http://"
   @@trailer_domain = "trailers.apple.com"
   @@trailer_path = "/trailers/home/feeds/just_added.json"
 
-  def AppleTrailers.just_added
+  def self.just_added
     parse_movies(JSON.parse(Net::HTTP.get(@@trailer_domain, @@trailer_path)))
   end
 
-  def AppleTrailers.parse_movies(movie_list)
+  def self.parse_movies(movie_list)
     movie_list.collect do |trailer_info|
       Movie.new({ 
         location: trailer_info['location'], 

@@ -8,10 +8,17 @@ module AppleTrailers
       options.each { |key, value| instance_variable_set("@"+key.to_s, value)}
     end
 
+    def description
+      doc = Nokogiri::HTML(Net::HTTP.get(URI(["http://trailers.apple.com", @location].join(''))))
+      doc.at('meta[@name="Description"]/@content').value
+    end
+
     def trailers
       doc = Nokogiri::HTML(Net::HTTP.get(URI(["http://trailers.apple.com", @location, "includes/playlists/web.inc"].join(''))))
       doc.css('.trailer').count > 1 ? get_multiple_trailers(doc) : get_single_trailer(doc)
     end
+
+    private
 
     def get_single_trailer(doc)
       trailer = doc.css('.target-quicktimeplayer').max { |b1, b2| b1.text.to_i <=> b2.text.to_i}
