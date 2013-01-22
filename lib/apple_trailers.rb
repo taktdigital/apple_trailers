@@ -17,6 +17,8 @@ module AppleTrailers
       Movie.new({ 
         location: trailer_info['location'], 
         title: trailer_info['title'],
+        directors: trailer_info['directors'],
+        actors: trailer_info['actors'],
         moviesite: trailer_info['moviesite'],
         rating: trailer_info['rating'], 
         genre: trailer_info['genre'][0],

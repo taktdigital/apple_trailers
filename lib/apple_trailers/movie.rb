@@ -2,7 +2,7 @@ require 'nokogiri'
 
 module AppleTrailers
   class Movie
-    attr_accessor :location, :title, :moviesite, :rating, :genre, :studio
+    attr_accessor :location, :title, :moviesite, :rating, :genre, :studio, :directors, :actors
 
     def initialize(options)
       options.each { |key, value| instance_variable_set("@"+key.to_s, value)}
