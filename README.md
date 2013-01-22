@@ -44,7 +44,7 @@ Or install it yourself as:
      => "The Call - Trailer" 
      
     movie.trailers.first.url
-     => "http://trailers.apple.com/movies/magnolia_pictures/aplaceatthetable/aplaceatthetable-tlr1_h1080p.mov"
+     => "http://trailers.apple.com/movies/sony_pictures/thecall/call-tlr1b_h1080p.mov"
 
 ## Contributing
 
