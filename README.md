@@ -26,23 +26,23 @@ Or install it yourself as:
     movie = movies.first
     
     movie.title
-     => "A Place at the Table" 
+     => "The Call"
     
     movie.studio
-     => "Magnolia Pictures" 
+     => "Sony Pictures" 
     
     movie.rating
-     => "PG"
+     => "Not yet rated"
     
     movie.genre
-     => "Documentary"
+     => "Thriller"
+     
+    movie.description
+     => "When veteran 911 operator, Jordan (Halle Berry), takes a life-altering call from a teenage girl (Abigail Breslin) who has just been abducted, she realizes that she must confront a killer from her past in order to save the girl's life."
      
     movie.trailers.first.title
-     => "A Place at the Table - Trailer" 
+     => "The Call - Trailer" 
      
-    movie.trailers.first.description
-     => "A Place at the Table: A Documentary produced by Magnolia Pictures.  For more information visit http://www.facebook.com/aPlaceAtTheTableMovie" 
-    
     movie.trailers.first.url
      => "http://trailers.apple.com/movies/magnolia_pictures/aplaceatthetable/aplaceatthetable-tlr1_h1080p.mov"
 
