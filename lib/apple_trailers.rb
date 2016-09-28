@@ -28,6 +28,29 @@ module AppleTrailers
     end
   end
 
+
+
+  def self.just_added_best
+    best_trailers(JSON.parse(Net::HTTP.get(@@trailer_domain, @@trailer_path)))
+  end
+
+  def self.best_trailers(movie_list)
+    movies = movie_list.collect do |trailer_info|
+      Movie.new({ 
+        location: trailer_info['location'], 
+        title: trailer_info['title'],
+        directors: trailer_info['directors'],
+        actors: trailer_info['actors'],
+        moviesite: trailer_info['moviesite'],
+        rating: trailer_info['rating'], 
+        genre: trailer_info['genre'][0],
+        studio: trailer_info['studio']
+      })
+    end
+
+    trailers = movies.collect { |m| m.latest_best_trailer }
+  end
+
   def self.domain
     @@trailer_domain
   end
