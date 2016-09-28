@@ -5,6 +5,7 @@ require 'json'
 require 'net/http'
 
 module AppleTrailers
+
   @@trailer_domain = "trailers.apple.com"
   @@trailer_path = "/trailers/home/feeds/just_added.json"
 
@@ -25,5 +26,9 @@ module AppleTrailers
         studio: trailer_info['studio']
       })
     end
+  end
+
+  def self.domain
+    @@trailer_domain
   end
 end

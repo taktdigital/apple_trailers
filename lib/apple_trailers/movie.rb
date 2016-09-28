@@ -9,26 +9,32 @@ module AppleTrailers
     end
 
     def description
-      doc = Nokogiri::HTML(Net::HTTP.get(URI(["http://trailers.apple.com", @location].join(''))))
-      doc.at('meta[@name="Description"]/@content').value
+      doc = get_details
+      doc["details"]["locale"].first[1]["synopsis"]
     end
 
-    def trailers
-      doc = Nokogiri::HTML(Net::HTTP.get(URI(["http://trailers.apple.com", @location, "includes/playlists/web.inc"].join(''))))
-      doc.css('.trailer').count > 1 ? get_multiple_trailers(doc) : get_single_trailer(doc)
+    def all_trailers
+      doc = get_details
+      doc["clips"].collect do |clip|
+        Trailer.new({movie: self, type: clip["title"], runtime: clip["runtime"], posted: clip["posted"], srcs: clip["versions"]["enus"]["sizes"]})
+      end
+    end
+
+    def latest_best_trailer
+      doc = get_details
+      trailers = doc["clips"].collect do |clip|
+        Trailer.new({movie: self, type: clip["title"], runtime: clip["runtime"], posted: clip["posted"], srcs: clip["versions"]["enus"]["sizes"]})
+      end
+
+      trailers.sort_by {|trailer| trailer.posted}.pop.best
     end
 
     private
 
-    def get_single_trailer(doc)
-      trailer = doc.css('.target-quicktimeplayer').max { |b1, b2| b1.text.to_i <=> b2.text.to_i}
-      [ Trailer.new({ movie: self, url: trailer.attributes['href'].value, type: doc.css('h3').first.content }) ]
-    end
-
-    def get_multiple_trailers(doc)
-      trailer_groups = doc.css('.trailer')
-      hd_trailers = trailer_groups.reject {  |group| group.css('.target-quicktimeplayer').empty? }.collect { |group| group.css('.target-quicktimeplayer').max { |b1, b2| b1.text.to_i <=> b2.text.to_i} }
-      hd_trailers.collect { |trailer| Trailer.new({ movie: self, url: trailer.attributes['href'].value, type: doc.css('h3').first.content }) }
+    def get_details
+      temp_doc = Nokogiri::HTML(Net::HTTP.get(AppleTrailers.domain, @location))
+      id = temp_doc.at('meta[@name="apple-itunes-app"]').attributes["content"].value.split("/").pop
+      JSON.parse(Net::HTTP.get(AppleTrailers.domain, "/trailers/feeds/data/#{id}.json"))
     end
   end
 end

@@ -6,8 +6,8 @@ require 'apple_trailers/version'
 Gem::Specification.new do |gem|
   gem.name          = "apple_trailers"
   gem.version       = AppleTrailers::VERSION
-  gem.authors       = ["Sean Stavropoulos"]
-  gem.email         = ["seans@fullscreen.net"]
+  gem.authors       = ["Avi Charlop", "Sean Stavropoulos"]
+  gem.email         = ["avi@taktdigital.com", "seans@fullscreen.net"]
   gem.description   = "Description of apple trailers"
   gem.summary       = "Summary of apple trailers"
   gem.homepage      = ""
